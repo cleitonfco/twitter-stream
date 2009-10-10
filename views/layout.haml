@@ -1,0 +1,43 @@
+%html{:xmlns=> "http://www.w3.org/1999/xhtml", 'xml:lang' => "en", :lang => "en"}
+	%head
+		%meta{'http-equiv' => "Content-Type", 'content' => "text/html; charset=utf-8"}
+		%title TrendTime - Siga @trendti_me no Twitter
+		%link{:type => "text/css", :media => "screen", :href => "/css/layout.css", :rel => "stylesheet"}
+		%script{:type => "text/javascript", :src => "/js/jquery.js"}
+		%script{:type => "text/javascript", :src => "/js/timers.js"}
+		%script{:type => "text/javascript", :charset => "utf8"}
+			var ultimoid=#{@max_id};
+		%script{:type => "text/javascript", :src => "/js/functions.js"}
+
+	%body
+		%div{:id => :page}
+			%div{:id => :top}
+				%div{:class => :logos}
+					%h1{:id => :logo}
+						%a{:href => "http://trendti.me"}
+							TrendTime
+
+			%div{:id => :content}
+				%div{:class => :listing}
+					%ul
+						= yield
+
+				%div{:class => :panel}
+					%div{:class => :users}
+						- @users.each do |user|
+							%span{:class => :vcard}
+								%a{:title => "#{user.user}", :rel => "contact", :class => "url", :href=> "http://twitter.com/#{user.user}"}
+									%img{:width => 48, :height => 48, :src => "#{user.profile_image_url}", :class => "photo fn", :alt => "#{user.user}, T:#{user.posts}"}
+
+			%div{:id => :footer}
+
+			%script{:type=>"text/javascript"}
+				:plain
+					var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+					document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+			%script{:type=>"text/javascript"}
+				:plain
+					try {
+					var pageTracker = _gat._getTracker("UA-176028-1");
+					pageTracker._trackPageview();
+					} catch(err) {}

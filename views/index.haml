@@ -1,0 +1,15 @@
+- @tweets.each do |tweet|
+	%li{"class" => "twitter", :id => "#{tweet.id}"}
+		%a{:href => "http://twitter.com/#{tweet.from_user}"}
+			%img{:src => "#{tweet.profile_image_url}", :class => :photo, :title => "#{tweet.from_user}"}
+		%img{:src => "/img/arr3.gif", :class => :arr}
+		%p{"class" => "status", :id => "message-#{tweet.id}"}><
+			%a{:href => "http://twitter.com/#{tweet.from_user}", :class => :from_user}><
+				@#{tweet.from_user}: 
+			#{" " + tweet.text}
+		%p{"class" => "info"}
+			enviado em 
+			%a{:href => "http://twitter.com/#{tweet.from_user}/status/#{tweet.id}", :class => :date}#{tweet.to_time}
+			%span{:class => :client}
+				\- via #{tweet.source}
+
