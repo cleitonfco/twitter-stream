@@ -11,8 +11,9 @@ end
 
 get '/:event' do
   content_type "text/html", :charset => "utf-8"
-  @tweets = Tweet.all(:conditions => ["event = ?", params['event']], :order => 'id DESC', :limit => 30)
-  @users  = User.all(:conditions => ["event = ?", params['event']], :order => 'posts DESC', :limit => 40)
+  @key = params['event']
+  @tweets = Tweet.all(:conditions => ["event = ?", @key], :order => 'id DESC', :limit => 30)
+  @users  = User.all(:conditions => ["event = ?", @key], :order => 'posts DESC', :limit => 40)
   @max_id = @tweets.first.id
   haml :index
 end
